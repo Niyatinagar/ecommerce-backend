@@ -1,164 +1,242 @@
-# REST API for an E-Commerce Application
+# 🛒 E-Commerce Backend REST API
 
-* We have developed this REST API for an e-commerce application. This API performs all the fundamental CRUD operations of any e-commerce platform with user validation at every step.
-* This project is developed by a team of 5 members during our project week in Masai School, Bengaluru. 
+![Java](https://img.shields.io/badge/Java-17-blue)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3-brightgreen)
+![MySQL](https://img.shields.io/badge/MySQL-Database-blue)
+![Hibernate](https://img.shields.io/badge/Hibernate-JPA-orange)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
+---
 
-## E-R Diagram for the application
+## 👩‍💻 Author
 
-![E-R Diagram](./ER%20Diagram/E-Commerce%20API%20ER%20Diagram.jpeg?raw=true)
+**Niyati Nagar**  
+Backend Developer | Java | SQL | REST APIs  
 
-## Tech Stack
+---
 
-* Java
-* Spring Framework
-* Spring Boot
-* Spring Data JPA
-* Hibernate
-* MySQL
+## 📖 Project Overview
 
-## Modules
+The **E-Commerce Backend REST API** is a full-featured backend application built using **Java, Spring Boot, Spring Data JPA, Hibernate, and MySQL**.
 
-* Login, Logout Module
-* Seller Module
-* Customer Module
-* Product Module
-* Cart Module
-* Order Module
+This project simulates a real-world e-commerce platform that manages:
 
-## Features
+- Customer and Seller authentication  
+- Product inventory management  
+- Cart operations  
+- Order placement and tracking  
+- Session-based security  
 
-* Customer and Seller authentication & validation with session token having validity of 1 hour for security purposes
-* Seller Features:
-    * Administrator Role of the entire application
-    * Only registered seller with valid session token can add/update/delete products from main database
-    * Seller can access the details of different customers, orders
-* Customer Features:
-    * Registering themselves with application, and logging in to get the valid session token
-    * Viewing different products and adding them to cart and placing orders
-    * Only logged in user can access his orders, cart and other features.
+The application follows a layered architecture and RESTful design principles, ensuring scalability, maintainability, and secure data handling.
 
-## Contributors
+---
 
-* [@abinashpanigrahi](https://github.com/abinashpanigrahi)
-* [@Dathuram16](https://github.com/Dathuram16)
-* [@kamalvinjamoori](https://github.com/kamalvinjamoori)
-* [@anandrajsingh05](https://github.com/anandrajsingh05)
-* [@Adithyanathkv](https://github.com/Adithyanathkv)
+## 🏗️ Architecture
 
+The project follows a clean layered architecture:
 
-## Installation & Run
+Controller → Service → Repository → Database
 
-* Before running the API server, you should update the database config inside the [application.properties](E-Commerce-Backend\src\main\resources\application.properties) file. 
-* Update the port number, username and password as per your local database config.
+- **Controller Layer**: Handles HTTP requests and responses
+- **Service Layer**: Contains business logic
+- **Repository Layer**: Communicates with MySQL database using JPA
+- **Database Layer**: Enforces constraints and relationships
 
-```
-    server.port=8009
+---
 
-    spring.datasource.url=jdbc:mysql://localhost:3306/ecommercedb
-    spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-    spring.datasource.username=root
-    spring.datasource.password=root
+## 🚀 Key Features
 
-```
+### 🔐 Authentication & Security
+- Separate login & registration for Customers and Sellers
+- Session-based authentication
+- Secure session token with 1-hour validity
+- Token required for protected operations
 
-## API Root Endpoint
+---
 
-`https://localhost:8009/`
+### 👤 Customer Features
+- Register & login
+- View products
+- Add/remove items from cart
+- Place orders
+- View order history
+- Update profile, password, address, and card details
+- Delete account
 
-`http://localhost:8009/swagger-ui/index.html#/`
+---
 
+### 🏪 Seller Features
+- Register & login
+- Add, update, delete products
+- View customers & orders
+- Update profile and credentials
 
-## API Module Endpoints
+---
 
-### Login & Logout Module
+### 📦 Product Management
+- Add new products
+- Update product details
+- Update product quantity
+- View products by category
+- View seller-specific products
+- Delete products
 
-* `POST /register/customer` : Register a new customer
-* `POST /login/customer` : Logging in customer with valid mobile number & password
-* `POST /logout/customer` : Logging out customer based on session token
-* `POST /register/seller` : Register a new seller
-* `POST /login/seller` : Logging in Seller
-* `POST /logout/seller` : Logging out Seller based on session token
+---
 
+### 🛒 Cart Management
+- Add items to cart
+- Remove items
+- Clear cart
+- View cart contents
 
-### Customer Module
+---
 
-* `GET /customer/current` : Getting currently logged in customer
-* `GET /customer/orders` : Getting order history of logged in customer
-* `GET /customers` : Getting All customers
-* `PUT /customer` : Updates logged in customer
-* `PUT /customer/update/password` : Updates customer password
-* `PUT /customer/update/card` : Updates credit card details
-* `PUT /customer/update/address?type=home` : Updates customer's home address
-* `PUT /customer/update/credentials` : Updates email address and mobile number
-* `DELETE /customer` : Deletes logged in user with valid session token
-* `DELETE /customer/delete/address?type=home` : Deletes customer's home address
+### 📑 Order Management
+- Place order from cart
+- View all orders
+- View orders by date
+- Update pending order
+- Cancel order
 
+---
 
-### Seller Module
+## 🛠️ Tech Stack
 
-* `GET /seller/{sellerid}` : Gets seller with passed seller Id
-* `GET /seller/current` : Gets seller details for currently logged in seller
-* `GET /sellers` : Gets all sellers
-* `POST /addseller` : Adding new seller
-* `PUT /seller` : Updates seller details
-* `PUT /seller/update/password` : Updates seller password
-* `PUT /seller/update/mobile` : Updates seller mobile number
-* `DELETE /seller/{sellerid}` : Deletes seller with passed id
+- **Backend**: Java 17, Spring Boot
+- **Database**: MySQL
+- **ORM**: Hibernate, Spring Data JPA
+- **Build Tool**: Maven
+- **API Testing**: Swagger UI / Postman
 
+---
 
-### Product Module
+## 📊 Database Design
 
-* `GET /product/{id}` : Gets product with given product id
-* `GET /products` : Gets all products
-* `GET /products/{category}` : Gets product with given category
-* `GET /products/seller/{id}` : Gets product of given seller id
-* `POST /products` : Adds a new product to database
-* `PUT /products` : Updates the product with given product id
-* `PUT /products/{id}` : Updates product quantity
-* `DELETE /product/{id}` : Deletes product with given id
+The application is based on a structured relational model including:
 
+- Customer
+- Seller
+- Product
+- Cart
+- Order
+- Session
 
-### Cart Module
+Foreign keys and constraints ensure data integrity across modules.
 
-* `GET /cart` : Get all items in Customer Cart
-* `POST /cart/add` : Add item to Cart
-* `DELETE /cart` : Remove item from Cart
-* `DELETE /cart/clear` : Clear entire cart
+---
 
+## ⚙️ Installation & Setup
 
-### Order Module
-
-* `GET /orders/{id}` : Gets order details with given order id
-* `GET /orders` : Gets all orders
-* `GET /orders/by/date` : Gets orders placed on given date (DD-MM-YYYY)
-* `POST /order/place` : Places a new order based on cart items
-* `PUT /orders/{id}` : Updates a pending order
-* `DELETE /orders/{id}` : Cancels an order
-
-
-### Sample API Response for Customer Login
-
-`POST   localhost:8009/login/customer`
-
-* Request Body
+### 1️⃣ Clone the Repository
 
 ```
-    {
-        "mobileId": "9999999999",
-        "password": "shyam123456"
-    }
+git clone https://github.com/YOUR_USERNAME/ecommerce-backend.git
+cd ecommerce-backend
 ```
 
-* Response
+---
+
+### 2️⃣ Configure Database
+
+Create MySQL database:
+
+```sql
+CREATE DATABASE ecommercedb;
+```
+
+Update `application.properties`:
 
 ```
-    {
-        "sessionId": 23,
-        "token": "customer_0ad57094",
-        "userId": 19,
-        "userType": "customer",
-        "sessionStartTime": "2022-06-10T10:48:20.0109626",
-        "sessionEndTime": "2022-06-10T11:48:20.0109626"
-    }
+server.port=8009
+
+spring.datasource.url=jdbc:mysql://localhost:3306/ecommercedb
+spring.datasource.username=root
+spring.datasource.password=your-password
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
 ```
+
+---
+
+### 3️⃣ Run the Application
+
+```
+mvn clean install
+mvn spring-boot:run
+```
+
+API runs at:
+
+```
+http://localhost:8009/
+```
+
+Swagger UI:
+
+```
+http://localhost:8009/swagger-ui/index.html
+```
+
+---
+
+## 📌 Example API – Customer Login
+
+**POST** `/login/customer`
+
+Request:
+
+```json
+{
+  "mobileId": "9999999999",
+  "password": "password123"
+}
+```
+
+Response:
+
+```json
+{
+  "sessionId": 23,
+  "token": "customer_0ad57094",
+  "userId": 19,
+  "userType": "customer",
+  "sessionStartTime": "2024-07-06T10:48:20",
+  "sessionEndTime": "2024-07-06T11:48:20"
+}
+```
+
+---
+
+## 🌟 What This Project Demonstrates
+
+- REST API development using Spring Boot
+- CRUD operations with MySQL
+- Session-based authentication
+- Data validation & integrity
+- Clean layered backend architecture
+- Enterprise-level module separation
+
+---
+
+## 🎯 Why This Project?
+
+This project reflects my ability to design and implement scalable backend systems suitable for enterprise-grade applications such as e-commerce platforms.
+
+It demonstrates strong understanding of:
+
+- SQL relationships
+- Authentication flow
+- Business logic handling
+- REST API best practices
+
+---
+
+## 📬 Contact
+
+**Niyati Nagar**  
+GitHub: https://github.com/Niyatinagar  
+
+---
+
+⭐ If you found this project useful, feel free to star it!
